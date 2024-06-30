@@ -83,7 +83,10 @@ export const InputField = ({
             placeholder={placeholder}
             placeholderTextColor={'#667085'}
             onChangeText={onChangeText}
+            editable={false}
             {...inputProps}
+            onPress={onPress}
+            value={value}
           />
 
           <DropDown width={24} height={24} style={{marginRight: '5%'}} />
@@ -100,7 +103,12 @@ export const InputField = ({
             {...inputProps}
           />
           {showPassword ? (
-            <EyeClosed width={24} height={24} style={{marginRight: '5%'}} />
+            <EyeClosed
+              width={24}
+              height={24}
+              style={{marginRight: '5%'}}
+              onPress={onPress}
+            />
           ) : (
             <Icon
               name="eyeo"
@@ -112,7 +120,7 @@ export const InputField = ({
         </View>
       )}
       {title === 'SEARCH_INPUT' && (
-        <View style={styles.row}>
+        <View style={[styles.row]}>
           <TextInput
             style={styles.textInputStyles}
             placeholder={placeholder}

@@ -17,7 +17,7 @@ export const CompetitionList = ({comapetition, onPress}) => {
         data={comapetition}
         keyExtractor={comapetition => comapetition.id}
         renderItem={({item}) => (
-          <CompetitionItem key={item.id} comapetition={item} {...events} />
+          <CompetitionItem key={item.id} comapetition={item} {...events}   onPress={() => onPress(item)}/>
         )}
         showsVerticalScrollIndicator={false}
       />

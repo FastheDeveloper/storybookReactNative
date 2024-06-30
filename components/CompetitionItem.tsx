@@ -1,4 +1,11 @@
-import {ImageBackground, StyleSheet, Text, View} from 'react-native';
+import {
+  ImageBackground,
+  Pressable,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React from 'react';
 
 export interface CompetitionProps {
@@ -14,22 +21,25 @@ export interface CompetitionProps {
 
 export const CompetitionItem = ({
   comapetition: {id, title, fromDate, toDate, location},
+  onPress,
 }: CompetitionProps) => {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <ImageBackground
         resizeMode="cover"
         source={require('../assets/pngs/bg.png')}
         style={styles.imgBg}>
         <View style={styles.content}>
           <Text style={styles.titleText}>{title}</Text>
-          <Text style={styles.titleTextDate}>
-            {fromDate} ~ {toDate}
-          </Text>
-          <Text style={styles.titleTextLocation}>{location}</Text>
+          <View>
+            <Text style={styles.titleTextDate}>
+              {fromDate} ~ {toDate}
+            </Text>
+            <Text style={styles.titleTextLocation}>{location}</Text>
+          </View>
         </View>
       </ImageBackground>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -49,25 +59,28 @@ const styles = StyleSheet.create({
   content: {
     // paddingVertical: 24,
     paddingHorizontal: 24,
+
+    marginRight: 30,
+    height: '100%',
   },
   titleText: {
-    fontSize: 18,
+    fontSize: 20,
     color: 'white',
     fontWeight: '700',
     letterSpacing: -0.4,
-    marginVertical: '3%',
+    marginVertical: '10%',
   },
   titleTextDate: {
-    fontSize: 14,
+    fontSize: 18,
     color: 'white',
     fontWeight: '500',
     letterSpacing: -0.4,
   },
   titleTextLocation: {
-    fontSize: 14,
+    fontSize: 16,
     color: '#B8BFFF',
     fontWeight: '500',
     letterSpacing: -0.4,
-    marginVertical: '3%',
+    // marginVertical: '5%',
   },
 });

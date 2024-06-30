@@ -1,16 +1,19 @@
 import React, {useState} from 'react';
-import {SafeAreaView, StyleSheet, Text} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import {MyButton} from './.storybook/stories/Button/Button';
 import {AppButtons} from './components/AppButtons';
 import {InputField} from './components/InputField';
 import {CompetitionList} from './components/CompetitionList';
+import {NavigationContainer} from '@react-navigation/native';
+import StackNavigation from './src/navigations/StackNavigation';
+
 const storyBookApp = 'true';
 
 function App(): React.JSX.Element {
   const [vals, setVals] = useState('dd');
   return (
-    <SafeAreaView>
-      <Text>{vals}</Text>
+    <View style={{flex: 1, backgroundColor: 'white'}}>
+      {/* <Text>{vals}</Text> */}
       {/* <MyButton
         text="Fas Button"
         onPress={() => console.log('Fas says hello')}
@@ -31,7 +34,7 @@ function App(): React.JSX.Element {
         value={vals}
         onChangeText={(text: string) => setVals(text)}
       /> */}
-      <CompetitionList
+      {/* <CompetitionList
         comapetition={[
           {
             title: '20th Asian Game - Achi Nagoya 2026 (Winter)',
@@ -49,8 +52,11 @@ function App(): React.JSX.Element {
           },
         ]}
         onPress={() => console.log('')}
-      />
-    </SafeAreaView>
+      /> */}
+      <NavigationContainer>
+        <StackNavigation />
+      </NavigationContainer>
+    </View>
   );
 }
 

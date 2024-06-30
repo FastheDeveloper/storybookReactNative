@@ -15,6 +15,11 @@ export type MyButtonProps = {
 };
 
 export const AppButtons = ({onPress, text, title}: MyButtonProps) => {
+  const alignSelf =
+    title === 'GO_BACK' || title === 'GO_BACK_SHADE' || title === 'CLOSE_BUTTON'
+      ? 'flex-start'
+      : 'auto';
+
   const styles = StyleSheet.create({
     container: {
       // paddingHorizontal: 2,
@@ -22,7 +27,7 @@ export const AppButtons = ({onPress, text, title}: MyButtonProps) => {
       backgroundColor: title !== 'EMAIL_LOGIN' ? '#253BFF' : '#1D2939',
       borderRadius: 30,
     },
-    text: {color: 'white'},
+    text: {color: 'white', fontSize: 14, fontWeight: '700'},
     row: {
       flexDirection: 'row',
       alignItems: 'center',
@@ -46,7 +51,8 @@ export const AppButtons = ({onPress, text, title}: MyButtonProps) => {
         {
           paddingHorizontal: title === 'BLAND' ? 16 : 0,
           paddingVertical: title === 'BLAND' ? 16 : 0,
-          borderRadius: title === 'BLAND' ? 8 : 30,
+          borderRadius: 30,
+          alignSelf,
         },
       ]}
       onPress={onPress}
@@ -93,7 +99,11 @@ export const AppButtons = ({onPress, text, title}: MyButtonProps) => {
         </View>
       )}
       {title === 'GO_BACK' && (
-        <View style={[styles.row, {backgroundColor: 'white'}]}>
+        <View
+          style={[
+            styles.row,
+            {backgroundColor: 'white', alignSelf: 'flex-start'},
+          ]}>
           <View style={[styles.circle, {borderColor: '#D0D5DD'}]}>
             <BackIcon width={20} height={20} />
           </View>
