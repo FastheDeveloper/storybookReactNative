@@ -33,3 +33,31 @@ export const BlandButton: StoryObj<typeof AppButtons> = {
     title: 'BLAND',
   },
 };
+
+export const EmailButton: StoryObj<typeof AppButtons> = {
+  args: {
+    text: 'Email Button',
+    title: 'EMAIL_LOGIN',
+  },
+};
+
+export const BackButton: StoryObj<typeof AppButtons> = {
+  args: {
+    text: '',
+    title: 'GO_BACK',
+  },
+};
+
+export const BackButtonShade: StoryObj<typeof AppButtons> = {
+  args: {
+    text: '',
+    title: 'GO_BACK_SHADE',
+  },
+};
+
+export const CloseButton: StoryObj<typeof AppButtons> = {
+  args: {
+    text: '',
+    title: 'CLOSE_BUTTON',
+  },
+};

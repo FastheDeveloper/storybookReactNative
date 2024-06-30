@@ -1,15 +1,54 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {SafeAreaView, StyleSheet, Text} from 'react-native';
 import {MyButton} from './.storybook/stories/Button/Button';
+import {AppButtons} from './components/AppButtons';
+import {InputField} from './components/InputField';
+import {CompetitionList} from './components/CompetitionList';
 const storyBookApp = 'true';
 
 function App(): React.JSX.Element {
+  const [vals, setVals] = useState('dd');
   return (
     <SafeAreaView>
-      <Text>Hello story book</Text>
-      <MyButton
+      <Text>{vals}</Text>
+      {/* <MyButton
         text="Fas Button"
         onPress={() => console.log('Fas says hello')}
+      /> */}
+      {/* <AppButtons
+        onPress={function (): void {
+          throw new Error('Function not implemented.');
+        }}
+        text={'Sign up for free'}
+        title={'GO_BACK'}
+      /> */}
+      {/* <InputField
+        onPress={() => console.log('pressed')}
+        text={''}
+        title={'PASSWORD_INPUT'}
+        placeholder="Testing"
+        showPassword={true}
+        value={vals}
+        onChangeText={(text: string) => setVals(text)}
+      /> */}
+      <CompetitionList
+        comapetition={[
+          {
+            title: '20th Asian Game - Achi Nagoya 2026 (Winter)',
+            fromDate: '2000-12-02',
+            toDate: '2024-14-02',
+            location: 'Pyeongchang, Gangwon-do, Korea Very Very long city name',
+            id: '1',
+          },
+          {
+            title: 'Achi Nagoya 2026 (Winter)',
+            fromDate: '2000-12-02',
+            toDate: '2024-14-02',
+            location: 'Pyeongchang, Gangwon-do, Korea Very Very long city name',
+            id: '2',
+          },
+        ]}
+        onPress={() => console.log('')}
       />
     </SafeAreaView>
   );
