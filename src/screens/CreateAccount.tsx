@@ -15,16 +15,18 @@ import {CheckBox} from '../../components/CheckBox';
 import {CompetitionList} from '../../components/CompetitionList';
 import {TestData} from '../data/TestData';
 import {Star} from '../../assets/svgs/Enter';
-
+import Fuse from 'fuse.js';
 type RootStackParamList = {
   Onboarding: undefined;
   CreateAccount: undefined;
+  Home: undefined;
   // Add other screens if needed
 };
 
 type HomeScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
-  'CreateAccount'
+  'CreateAccount',
+  'Home'
 >;
 
 const validateEmail = (email: string) => {
@@ -42,7 +44,8 @@ const CreateAccount = () => {
     lastName: '',
     checked: false,
   });
-
+  const [searchInput, setSearchInput] = useState('');
+  const [filteredData, setFilteredData] = useState(TestData);
   const [emailError, setEmailError] = useState(true);
 
   const [emailhasError, setEmailHasError] = useState(true);
@@ -171,6 +174,19 @@ const CreateAccount = () => {
     }
   };
 
+  const fuse = new Fuse(TestData, {
+    keys: ['title', 'location'], // Keys to search by
+  });
+
+  useEffect(() => {
+    if (searchInput === '') {
+      setFilteredData(TestData);
+    } else {
+      const results = fuse.search(searchInput);
+      setFilteredData(results.map(result => result.item));
+    }
+  }, [searchInput]);
+
   return (
     <SafeAreaView style={styles.container}>
       <Modal visible={showModal}>
@@ -196,7 +212,8 @@ const CreateAccount = () => {
                 title={'SEARCH_INPUT'}
                 placeholder={'Competition to sign up * '}
                 showPassword={false}
-                value={''}
+                value={searchInput}
+                onChangeText={text => setSearchInput(text)}
               />
             </View>
             <View style={styles.HeaderContainer}>
@@ -210,7 +227,7 @@ const CreateAccount = () => {
               </Text>
             </View>
             <CompetitionList
-              comapetition={TestData}
+              comapetition={filteredData}
               onPress={(item: any) => {
                 setuserDetails({...userDetails, competition: item.title});
                 setShowModal(false);
@@ -220,7 +237,7 @@ const CreateAccount = () => {
           </View>
         </SafeAreaView>
       </Modal>
-      <Modal visible={true}>
+      <Modal visible={showModal2}>
         <View style={styles.innerModal2}>
           <View style={styles.done}>
             <View
@@ -228,7 +245,15 @@ const CreateAccount = () => {
               <View style={styles.star}>
                 <Star width={24} height={24} />
               </View>
-              <AppButtons onPress={() => {}} text={''} title={'CLOSE_BUTTON'} />
+              <AppButtons
+                onPress={() => {
+                  setShowModal2(false);
+
+                  navigation.navigate('Home');
+                }}
+                text={''}
+                title={'CLOSE_BUTTON'}
+              />
             </View>
             <Text style={[styles.Header, {marginVertical: 20}]}>
               Welcome to Soo
@@ -238,7 +263,15 @@ const CreateAccount = () => {
               Great to have you with us!
             </Text>
 
-            <AppButtons onPress={() => {}} text={'Got it'} title={'BLAND'} />
+            <AppButtons
+              onPress={() => {
+                setShowModal2(false);
+
+                navigation.navigate('Home');
+              }}
+              text={'Got it'}
+              title={'BLAND'}
+            />
             <View style={{marginBottom: '5%'}} />
           </View>
         </View>

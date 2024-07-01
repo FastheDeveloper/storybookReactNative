@@ -40,7 +40,7 @@ const OnboardingScreen = () => {
           />
           <View style={{marginVertical: '3%'}} />
           <AppButtons
-            onPress={() => console.log('Pressed')}
+            onPress={() => navigation.navigate('CreateAccount')}
             text={'Continue with Email'}
             title={'EMAIL_LOGIN'}
           />

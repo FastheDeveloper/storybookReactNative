@@ -1,11 +1,11 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 
 const SignedIn = () => {
   return (
-    <View>
-      <Text>SignedIn</Text>
-    </View>
+    <SafeAreaView>
+      <Text style={{margin: 10}}>Home page</Text>
+    </SafeAreaView>
   );
 };
 

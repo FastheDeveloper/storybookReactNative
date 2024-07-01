@@ -7,7 +7,7 @@ import {CompetitionList} from './components/CompetitionList';
 import {NavigationContainer} from '@react-navigation/native';
 import StackNavigation from './src/navigations/StackNavigation';
 
-const storyBookApp = 'true';
+const storyBookApp = 'false';
 
 function App(): React.JSX.Element {
   const [vals, setVals] = useState('dd');
