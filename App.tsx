@@ -8,7 +8,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import StackNavigation from './src/navigations/StackNavigation';
 
 // CHANGE HERE
-const storyBookApp = 'true';
+const storyBookApp = 'false';
 // CHANGE HERE
 
 function App(): React.JSX.Element {
