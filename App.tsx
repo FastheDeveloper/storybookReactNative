@@ -6,6 +6,7 @@ import {InputField} from './components/InputField';
 import {CompetitionList} from './components/CompetitionList';
 import {NavigationContainer} from '@react-navigation/native';
 import StackNavigation from './src/navigations/StackNavigation';
+import QuizProvider from './src/providers/QuizProvider';
 
 // CHANGE HERE
 const storyBookApp = 'false';
@@ -16,7 +17,9 @@ function App(): React.JSX.Element {
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <NavigationContainer>
-        <StackNavigation />
+        <QuizProvider>
+          <StackNavigation />
+        </QuizProvider>
       </NavigationContainer>
     </View>
   );

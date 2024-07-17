@@ -5,7 +5,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {AppButtons} from '../../components/AppButtons';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -14,6 +14,7 @@ import {EnterSvg, MailIcon} from '../../assets/svgs/Enter';
 import CustomButtonBetter, {
   BUTTON_SCHEME,
 } from '../../components/CustomButtonBetter';
+import QuizProvider, {useQuizContext} from '../providers/QuizProvider';
 
 type RootStackParamList = {
   Onboarding: undefined;
@@ -28,20 +29,16 @@ type HomeScreenNavigationProp = StackNavigationProp<
 
 const OnboardingScreen = () => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
-  const [carrotCount, setCarrotCOunt] = useState(0);
-  const updateCarrotCount = () => {
-    setCarrotCOunt(carrotCount + 1);
-  };
+  const {carrotCount, updateCarrotCountby3, updateCarrotCount} =
+    useQuizContext();
 
-  const updateCarrotCountby3 = () => {
-    setCarrotCOunt(carrotCount => carrotCount + 3);
-  };
   return (
     <ImageBackground
       source={require('../../assets/pngs/SplashDesign.png')}
       style={{flex: 1}}>
       <SafeAreaView style={styles.container}>
         <Text style={styles.text}>Soo</Text>
+
         <Text style={styles.text}>and Carrots {carrotCount}</Text>
 
         <View style={styles.bottomView}>
@@ -92,5 +89,8 @@ const styles = StyleSheet.create({
     bottom: 0,
     position: 'absolute',
     width: '100%',
+  },
+  textssss: {
+    color: 'yellow',
   },
 });
