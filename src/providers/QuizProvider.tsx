@@ -3,6 +3,7 @@ import React, {
   createContext,
   PropsWithChildren,
   useContext,
+  useEffect,
   useState,
 } from 'react';
 
@@ -11,6 +12,7 @@ type QuizContext = {
   updateCarrotCount: () => void;
   updateCarrotCountby3: () => void;
   setCarrotCOunt: (newCarrotCOunt: number) => void;
+  timeTillLastInteraction: number;
 };
 
 const QuizContext = createContext<QuizContext>({
@@ -18,10 +20,12 @@ const QuizContext = createContext<QuizContext>({
   updateCarrotCount: () => {},
   updateCarrotCountby3: () => {},
   setCarrotCOunt: () => {},
+  timeTillLastInteraction: 0,
 });
 
 const QuizProvider = ({children}: PropsWithChildren) => {
   const [carrotCount, setCarrotCOunt] = useState(0);
+  const [timeTillLastInteraction, setTimeTillLastInteraction] = useState(0);
 
   const isFinished = carrotCount >= 10;
   const resetCounter = () => {
@@ -44,6 +48,16 @@ const QuizProvider = ({children}: PropsWithChildren) => {
     setCarrotCOunt(carrotCount => carrotCount + 3);
   };
 
+  useEffect(() => {
+    setTimeTillLastInteraction(0);
+    const timer = setInterval(() => {
+      setTimeTillLastInteraction(currTime => currTime + 1);
+    }, 1000);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, [carrotCount]);
   return (
     <QuizContext.Provider
       value={{
@@ -51,6 +65,7 @@ const QuizProvider = ({children}: PropsWithChildren) => {
         updateCarrotCount,
         updateCarrotCountby3,
         setCarrotCOunt,
+        timeTillLastInteraction,
       }}>
       {children}
     </QuizContext.Provider>

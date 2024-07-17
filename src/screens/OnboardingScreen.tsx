@@ -29,8 +29,12 @@ type HomeScreenNavigationProp = StackNavigationProp<
 
 const OnboardingScreen = () => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
-  const {carrotCount, updateCarrotCountby3, updateCarrotCount} =
-    useQuizContext();
+  const {
+    carrotCount,
+    updateCarrotCountby3,
+    updateCarrotCount,
+    timeTillLastInteraction,
+  } = useQuizContext();
 
   return (
     <ImageBackground
@@ -40,6 +44,10 @@ const OnboardingScreen = () => {
         <Text style={styles.text}>Soo</Text>
 
         <Text style={styles.text}>and Carrots {carrotCount}</Text>
+
+        <Text style={styles.text}>
+          Time from last interaction: {timeTillLastInteraction}
+        </Text>
 
         <View style={styles.bottomView}>
           {/* <AppButtons
