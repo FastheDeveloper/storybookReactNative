@@ -5,7 +5,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {AppButtons} from '../../components/AppButtons';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -28,14 +28,21 @@ type HomeScreenNavigationProp = StackNavigationProp<
 
 const OnboardingScreen = () => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
+  const [carrotCount, setCarrotCOunt] = useState(0);
+  const updateCarrotCount = () => {
+    setCarrotCOunt(carrotCount + 1);
+  };
 
+  const updateCarrotCountby3 = () => {
+    setCarrotCOunt(carrotCount => carrotCount + 3);
+  };
   return (
     <ImageBackground
       source={require('../../assets/pngs/SplashDesign.png')}
       style={{flex: 1}}>
       <SafeAreaView style={styles.container}>
         <Text style={styles.text}>Soo</Text>
-        <Text style={styles.text}>and Carrots</Text>
+        <Text style={styles.text}>and Carrots {carrotCount}</Text>
 
         <View style={styles.bottomView}>
           {/* <AppButtons
@@ -44,8 +51,8 @@ const OnboardingScreen = () => {
             title={'SIGN_UP_FREE'}
           /> */}
           <CustomButton
-            title="Fas New Button "
-            onPress={() => console.warn('Custom Button Pressed')}
+            title="Update by 3"
+            onPress={updateCarrotCountby3}
             onLongPress={() => console.warn('Custom Button Long Pressed')}
             rightIcon={<EnterSvg width={25} height={20} />}
             leftIcon={<MailIcon width={25} height={20} />}
@@ -57,8 +64,8 @@ const OnboardingScreen = () => {
             title={'EMAIL_LOGIN'}
           /> */}
           <CustomButtonBetter
-            onPress={() => console.warn('fas')}
-            title="Fas"
+            onPress={updateCarrotCount}
+            title="Update by 1"
             scheme={BUTTON_SCHEME.primary}
             touchableStyle={{borderColor: 'green'}}
             textTitleStyle={{color: 'purple'}}

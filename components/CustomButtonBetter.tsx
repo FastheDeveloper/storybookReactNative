@@ -48,6 +48,7 @@ const CustomButtonBetter = ({
       enabled: {
         borderRadius: 16,
         opacity: 1,
+        backgroundColor: 'grey',
       },
       disabled: {
         borderRadius: 16,
