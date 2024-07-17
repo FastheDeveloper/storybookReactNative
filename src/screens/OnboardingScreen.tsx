@@ -5,7 +5,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import React, {useContext, useState} from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import {AppButtons} from '../../components/AppButtons';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -15,11 +15,11 @@ import CustomButtonBetter, {
   BUTTON_SCHEME,
 } from '../../components/CustomButtonBetter';
 import QuizProvider, {useQuizContext} from '../providers/QuizProvider';
+import {useTimer} from '../hooks/useTimer';
 
 type RootStackParamList = {
   Onboarding: undefined;
   CreateAccount: undefined;
-  // Add other screens if needed
 };
 
 type HomeScreenNavigationProp = StackNavigationProp<
@@ -29,12 +29,19 @@ type HomeScreenNavigationProp = StackNavigationProp<
 
 const OnboardingScreen = () => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
-  const {
-    carrotCount,
-    updateCarrotCountby3,
-    updateCarrotCount,
-    timeTillLastInteraction,
-  } = useQuizContext();
+  const {carrotCount, updateCarrotCountby3, updateCarrotCount} =
+    useQuizContext();
+  const {timeTillLastInteraction, startTimer, clearTimer} = useTimer(10);
+
+  useEffect(() => {
+    startTimer();
+
+    return () => {
+      clearTimer();
+    };
+  }, [carrotCount]);
+
+  const isFinished = carrotCount >= 10;
 
   return (
     <ImageBackground
@@ -43,7 +50,9 @@ const OnboardingScreen = () => {
       <SafeAreaView style={styles.container}>
         <Text style={styles.text}>Soo</Text>
 
-        <Text style={styles.text}>and Carrots {carrotCount}</Text>
+        <Text style={styles.text} onPress={clearTimer}>
+          and Carrots {carrotCount}
+        </Text>
 
         <Text style={styles.text}>
           Time from last interaction: {timeTillLastInteraction}
